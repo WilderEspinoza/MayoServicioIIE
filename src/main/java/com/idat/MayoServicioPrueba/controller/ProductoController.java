@@ -34,51 +34,33 @@ public class ProductoController {
 		return  new ResponseEntity<Void>(HttpStatus.CREATED);
 		
 	}
-	
 
 	@RequestMapping( path = "/eliminar/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-
 		Productos p =service.obtenerProductoId(id);
-		
 		if(p != null) {
 			service.eliminarProducto(id);
 			return  new ResponseEntity<Void>(HttpStatus.OK);
-
 		}
-		
 		return  new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-
 	}
-	
 	
 	@RequestMapping( path = "/actualizar", method = RequestMethod.PUT)
 	public ResponseEntity<Void> actualizar(@RequestBody Productos productos) {
-
 		Productos p =service.obtenerProductoId(productos.getIdProducto());
-		
 		if(p != null) {
 			service.actualizarProducto(productos);
 			return  new ResponseEntity<Void>(HttpStatus.OK);
-
 		}
-		
 		return  new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-
 	}
-	
 	
 	@RequestMapping( path = "/listar/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Productos> obtenerId(@PathVariable Integer id) {
-
 		Productos p =service.obtenerProductoId(id);
-		
 		if(p != null) {
 			return  new ResponseEntity<Productos>(service.obtenerProductoId(id),HttpStatus.OK);
-
 		}
-		
 		return  new ResponseEntity<Productos>(HttpStatus.NOT_FOUND);
-
 	}
 }
