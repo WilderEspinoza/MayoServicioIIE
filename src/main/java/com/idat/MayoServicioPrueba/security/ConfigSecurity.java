@@ -28,22 +28,11 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("profesor").password(encriptado().encode("123") ).roles("ADMIN");
-//		auth.inMemoryAuthentication().withUser("estudiante").password(encriptado().encode("123")).roles("ESTUDIANTE");
-
 		auth.userDetailsService(service).passwordEncoder(encriptado());
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-//		http.authorizeRequests()
-//			.antMatchers("/producto/v1/**").access("hasRole('ADMIN')")
-//			.and()
-//			.httpBasic()
-//			.and()
-//			.csrf().disable();
-		
 		http.authorizeRequests()
 			.antMatchers("/crearToken").permitAll()
 			.anyRequest()
@@ -57,7 +46,6 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 			.and()
 			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 			.csrf().disable();
-		
 	}
 	
 	@Bean
@@ -67,16 +55,13 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
-		// TODO Auto-generated method stub
 		return super.authenticationManagerBean();
 	}
 
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
-		// TODO Auto-generated method stub
 		return super.authenticationManager();
 	}
-	
 	
 
 
